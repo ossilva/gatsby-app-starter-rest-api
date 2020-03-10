@@ -17,13 +17,13 @@ export default ({ children }) => {
           method: 'GET',
           url: `${process.env.API}/user/verify`,
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'text/plain',
             'x-auth': token,
           },
         })
 
         await setAuthToken(data.token)
-        dispatchUserAction({ type: 'SAVE_USER', payload: data.user })
+        dispatchUserAction({ type: 'SAVE_USER', payload: 'any' })
         window.localStorage.setItem('token', data.token)
 
         if (
@@ -34,18 +34,11 @@ export default ({ children }) => {
           window.location.pathname === '/app/register/' ||
           window.location.pathname === '/app/'
         ) {
-          navigate('/app/tasks/')
+          navigate('/app/gallery/')
         }
         setLoading(false)
       } else {
-        if (
-          window.location.pathname === '/app/tasks' ||
-          window.location.pathname === '/app/tasks/' ||
-          window.location.pathname === '/app/task' ||
-          window.location.pathname === '/app/task/' ||
-          window.location.pathname === '/app/task/new/' ||
-          window.location.pathname === '/app/task/new'
-        ) {
+        if (window.location.pathname === '/app/gallery') {
           navigate('/app/login/')
         }
         setLoading(false)
@@ -55,9 +48,8 @@ export default ({ children }) => {
     }
   }
 
-  const logout = async () => {
+  const logout = () => {
     try {
-      await axios.delete(`${process.env.API}/user/logout`)
       dispatchUserAction({ type: 'LOGOUT' })
       window.localStorage.removeItem('token')
       setAuthToken(false)

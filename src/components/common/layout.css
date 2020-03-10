@@ -632,3 +632,8 @@ pre tt:after {
 .container .input-field span:before {
   top: 3.4rem;
 }
+
+.grid-parent {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
