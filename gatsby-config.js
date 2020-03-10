@@ -4,9 +4,9 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: `Not Todo app`,
-    description: `A demo Gatsby app connected to a REST API`,
-    author: `@smakosh`,
+    title: `Gallery App`,
+    description: `Photo gallery of Tenerife 2020`,
+    author: `@ossilva`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -28,7 +28,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: null,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
