@@ -57,11 +57,12 @@ export default () => {
   const [changeInd, setChangeInd] = useState(false)
 
   useEffect(() => {
-    ;(async () => {
+    const requestAndUpdateImages = async () => {
       const freshImageList = await getImageList()
       setFullImageList(freshImageList)
       setImageList(freshImageList)
-    })()
+    }
+    requestAndUpdateImages()
   }, [])
 
   useEffect(() => {
