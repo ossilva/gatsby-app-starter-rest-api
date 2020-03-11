@@ -1,5 +1,5 @@
 require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env`,
 })
 
 module.exports = {
@@ -35,4 +35,8 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
+  proxy: {
+    prefix: '/api',
+    url: 'http://localhost:5000',
+  },
 }
