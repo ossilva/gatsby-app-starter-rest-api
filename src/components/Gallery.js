@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Gallery from 'react-grid-gallery'
+import GridGallery from 'react-grid-gallery'
+
+//client side only
+import Loadable from '@loadable/component'
 import axios from 'axios'
 
 const apiListToContent = apiList => {
@@ -50,7 +53,7 @@ const getImageList = async () => {
   return apiListToContent(imageListData)
 }
 
-export default () => {
+const Gallery = () => {
   const [filter, setFilter] = useState('')
   const [fullImageList, setFullImageList] = useState()
   const [imageList, setImageList] = useState()
@@ -151,7 +154,7 @@ export default () => {
               type="text"
             />
           </div>
-          <Gallery
+          <GridGallery
             images={imageList}
             onSelectImage={(i, img) => {
               imageList[i].isSelected = !img.isSelected
@@ -162,3 +165,7 @@ export default () => {
     </>
   )
 }
+
+const LoadableGallery = Loadable(() => import('./Gallery'))
+
+export default Gallery

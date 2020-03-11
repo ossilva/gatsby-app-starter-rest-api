@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+
+//client side only
+import Loadable from '@loadable/component'
 import 'react-dropzone-uploader/dist/styles.css'
 import axios from 'axios'
 import Dropzone from 'react-dropzone-uploader'
 
-export default () => {
+const Upload = () => {
   const [tags, setTags] = useState('')
 
   const ImageAudioVideo = () => {
@@ -74,3 +77,7 @@ export default () => {
     </>
   )
 }
+
+const LoadableUpload = Loadable(() => import('./Upload'))
+
+export default Upload

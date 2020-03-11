@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react'
-import axios from 'axios'
 import { navigate } from 'gatsby'
 import Context from 'components/common/Context'
+
+//client-side only
+import Loadable from '@loadable/component'
+import axios from 'axios'
 import setAuthToken from 'helpers/setAuthToken'
 
-export default ({ form }) => {
+const Form = ({ form }) => {
   const { dispatchUserAction } = useContext(Context)
   const [isSubmitting, setSubmitting] = useState(false)
   const [details, setDetails] = useState({
@@ -32,9 +35,8 @@ export default ({ form }) => {
       const { password } = details
 
       if (form === 'login') {
-        if (
-           !password
-           ) {
+        if (!password) {
+          setSubmitting(false)
           setErrors({
             ...errors,
             password: 'Field is required',
@@ -88,3 +90,7 @@ export default ({ form }) => {
     </div>
   )
 }
+
+const LoadableForm = Loadable(() => import('./Form'))
+
+export default Form

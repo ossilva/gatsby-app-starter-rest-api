@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
-import axios from 'axios'
 import { navigate } from 'gatsby'
 import setAuthToken from 'helpers/setAuthToken'
 import Layout from 'components/common/Layout'
 import Context from './common/Context'
 
-export default ({ children }) => {
+//client side only
+import Loadable from '@loadable/component'
+import axios from 'axios'
+
+const AppWrapper = ({ children }) => {
   const { user, dispatchUserAction } = useContext(Context)
   const [loading, setLoading] = useState(true)
 
@@ -38,7 +41,12 @@ export default ({ children }) => {
         }
         setLoading(false)
       } else {
-        if (window.location.pathname === '/app/gallery') {
+        if (
+          window.location.pathname === '/app/gallery' ||
+          window.location.pathname === '/app/gallery/' ||
+          window.location.pathname === '/app/upload' ||
+          window.location.pathname === '/app/upload/'
+        ) {
           navigate('/app/login/')
         }
         setLoading(false)
@@ -77,3 +85,7 @@ export default ({ children }) => {
     </>
   )
 }
+
+const LoadableAppWrapper = Loadable(() => import('./AppWrapper'))
+
+export default AppWrapper
